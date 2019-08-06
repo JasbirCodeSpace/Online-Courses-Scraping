@@ -15,6 +15,7 @@ course_rating=[]
 ratings=[]
 course_link=[]
 i=0
+
 def open_new_course(link,i):
 	#open tab
 
@@ -25,8 +26,8 @@ def open_new_course(link,i):
 	driver.get(link)
 
 	try:
-		if driver.find_elements_by_xpath('//button[@class="Button_clbp6a-o_O-default_rkuhc4-o_O-md_1jvotax m-t-1 d-block m-x-auto"]/span[@class="Box_120drhm-o_O-centerJustify_1nezfbd-o_O-centerAlign_19zvu2s-o_O-displayflex_poyjc"]')[0].is_displayed():
-			driver.find_elements_by_xpath('//button[@class="Button_clbp6a-o_O-default_rkuhc4-o_O-md_1jvotax m-t-1 d-block m-x-auto"]/span[@class="Box_120drhm-o_O-centerJustify_1nezfbd-o_O-centerAlign_19zvu2s-o_O-displayflex_poyjc"]')[0].click()
+		# if driver.find_elements_by_xpath('//button[@class="Button_clbp6a-o_O-default_rkuhc4-o_O-md_1jvotax m-t-1 d-block m-x-auto"]/span[@class="Box_120drhm-o_O-centerJustify_1nezfbd-o_O-centerAlign_19zvu2s-o_O-displayflex_poyjc"]')[0].is_displayed():
+		# 	driver.find_elements_by_xpath('//button[@class="Button_clbp6a-o_O-default_rkuhc4-o_O-md_1jvotax m-t-1 d-block m-x-auto"]/span[@class="Box_120drhm-o_O-centerJustify_1nezfbd-o_O-centerAlign_19zvu2s-o_O-displayflex_poyjc"]')[0].click()
 
 		print('1')
 		course_name.append(driver.find_element_by_xpath('//h1[@class="H2_1pmnvep-o_O-weightNormal_s9jwp5-o_O-fontHeadline_1uu0gyz max-text-width-xl m-b-1s"]').text)
@@ -35,16 +36,16 @@ def open_new_course(link,i):
 		print('3')
 		ratings.append(driver.find_element_by_xpath('//div[@class="P_gjs17i-o_O-weightNormal_s9jwp5-o_O-fontBody_56f0wi m-r-1s"]/span').text)
 		
-		#print(course_name[i-1])
-		#print(course_rating[i-1])
-		#print(ratings[i-1])
+		print(course_name[i-1])
+		print(course_rating[i-1])
+		print(ratings[i-1])
 		
 		
-		#print("\n")
-		#coursera_solo.write(course_name+"\n")
-		#coursera_solo.write(course_rating+"\n")
-		#coursera_solo.write(ratings+"\n")
-		#coursera_solo.write("\n\n")
+		print("\n")
+		# coursera_solo.write(course_name+"\n")
+		# coursera_solo.write(course_rating+"\n")
+		# coursera_solo.write(ratings+"\n")
+		# coursera_solo.write("\n\n")
 	except Exception as e:
 		print(e)
 	# WebDriverWait(driver, 10).until(
@@ -98,4 +99,7 @@ rows = list(zip(course_link,course_name,course_rating,ratings))
 with open("openCourse1.csv", 'w') as csvfile: 
 	csvwriter = csv.writer(csvfile,delimiter=',',lineterminator='\n')
 	csvwriter.writerow(fields) 
-	csvwriter.writerows(rows)	
+	csvwriter.writerows(rows)
+
+driver.close()
+driver.quit()	

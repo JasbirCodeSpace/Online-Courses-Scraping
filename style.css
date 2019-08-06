@@ -1,0 +1,68 @@
+@mixin ribbon-title( $font-size: 18px, $color: #fff, $background-color: #e30613, $display: block, $shadow: drop-shadow(0 1px 2px rgba(0, 0, 0, .5)), $paddingVertical: 10px, $paddingHorizontal: 0, $margin: 20px auto, $width: 496px, $max-width: 70%, $arrow-curvature: 8px, $arrow-radius: 4px, ) {
+  /* Calc */
+  $arrow-offset: $arrow-curvature * -1;
+  $arrow-wing-size: $font-size / 2 + $paddingVertical;
+  $arrow-radius: $arrow-radius;
+  $arrow-offset: $arrow-offset;
+  $arrow-curvature: $arrow-curvature;
+  /* Props */
+  background-color: $background-color;
+  color: $color;
+  display: $display;
+  filter: $shadow;
+  font-size: $font-size;
+  line-height: 1;
+  margin: $margin;
+  max-width: $max-width;
+  padding: $paddingVertical $paddingHorizontal;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  width: $width;
+  transition: all 300ms;
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    border: $arrow-wing-size solid $background-color;
+    z-index: -1;
+  }
+  &::before {
+    left: $arrow-offset;
+    border-left: $arrow-curvature solid transparent;
+    border-top-left-radius: $arrow-radius;
+    border-bottom-left-radius: $arrow-radius;
+  }
+  &::after {
+    right: $arrow-offset;
+    border-right: $arrow-curvature solid transparent;
+    border-top-right-radius: $arrow-radius;
+    border-bottom-right-radius: $arrow-radius;
+  }
+}
+
+
+/***********************************
+ * Use
+ ***********************************/
+
+.ribbon-title--a {
+  @include ribbon-title( $font-size: 35px, $paddingVertical: 20px, $background-color: purple, );
+}
+
+.ribbon-title--b {
+  @include ribbon-title( $font-size: 25px, $arrow-curvature: 30px, $arrow-radius: 0, $background-color: #91040D, );
+}
+
+.ribbon-title--link {
+  @include ribbon-title();
+  &[href]:hover {
+    @include ribbon-title( $shadow: drop-shadow(0 5px 2px rgba(0, 0, 0, .5)), );
+    transform: translateY(-3px);
+  }
+  &[href]:active {
+    @include ribbon-title( $shadow: none, );
+    transform: translateY(0);
+  }
+}
